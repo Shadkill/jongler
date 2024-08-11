@@ -88,7 +88,6 @@ app.get("/fklhgldeujgls", (req, res) => {
 app.get("/comment", async (req, res) => {
   const comments = await Comment.find();
   const currentAdmin = res.cookie.admins;
-  await new Promise((res) => setTimeout(res, 1000));
   res.render("comment", { comments: comments, admin: currentAdmin });
 });
 
