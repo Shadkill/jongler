@@ -80,8 +80,8 @@ app.get("/", async(req, res) => {
   res.render("index", { admin: currentAdmin });
 });
 
-app.get("/fklhgldeujgls", async(req, res) => {
-  await new Promise((res) => setTimeout(res, 1000));
+app.get("/fklhgldeujgls", (req, res) => {
+
   res.render("admin");
   
 });
