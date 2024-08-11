@@ -37,7 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(cookieParser("dlkhfljdhfl3e0ldljh3-oxohdfcjsb"));
+app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "public")));
 
