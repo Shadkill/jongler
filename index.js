@@ -4,6 +4,8 @@ const helmet = require("helmet");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
+
+
 const db = require("./database");
 
 const { Connection } = require("mongoose");
@@ -46,7 +48,13 @@ app.post("/red_admin", async (req, res) => {
 
   const admin = await Admin.findOne({ login: login, password: password });
   if (admin) {
-    res.cookie.admins = admin;
+    await res.cookie("admins", admin.login, {
+      sameSite: "none",
+      httpOnly: true,
+      secure: true,
+      expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+    });
+
     return res.redirect("/");
   } else {
     return res.send("Данный пользователь не найден");
@@ -75,9 +83,9 @@ app.post("/comment_create", async (req, res) => {
 
 app.get("/", async(req, res) => {
   
-  const currentAdmin = res.cookie.admins;
+  const { admins } = req.cookies;
   await new Promise((res) => setTimeout(res, 1000));
-  res.render("index", { admin: currentAdmin });
+  res.render("index", { admin: admins });
 });
 
 app.get("/fklhgldeujgls", (req, res) => {
@@ -87,8 +95,8 @@ app.get("/fklhgldeujgls", (req, res) => {
 });
 app.get("/comment", async (req, res) => {
   const comments = await Comment.find();
-  const currentAdmin = res.cookie.admins;
-  res.render("comment", { comments: comments, admin: currentAdmin });
+  const  admins  = req.cookies.admins;
+  res.render("comment", { comments: comments, admin: admins });
 });
 
 app.post("/comment/delete/:id", async (req, res) => {
