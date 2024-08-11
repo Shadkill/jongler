@@ -73,17 +73,22 @@ app.post("/comment_create", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
+app.get("/", async(req, res) => {
+  
   const currentAdmin = res.cookie.admins;
+  await new Promise((res) => setTimeout(res, 1000));
   res.render("index", { admin: currentAdmin });
 });
 
-app.get("/fklhgldeujgls", (req, res) => {
+app.get("/fklhgldeujgls", async(req, res) => {
+  await new Promise((res) => setTimeout(res, 1000));
   res.render("admin");
+  
 });
 app.get("/comment", async (req, res) => {
   const comments = await Comment.find();
   const currentAdmin = res.cookie.admins;
+  await new Promise((res) => setTimeout(res, 1000));
   res.render("comment", { comments: comments, admin: currentAdmin });
 });
 
@@ -92,6 +97,7 @@ app.post("/comment/delete/:id", async (req, res) => {
 
   try {
     await Comment.findByIdAndDelete(commentId); // Удаляем комментарий по ID
+    await new Promise((res) => setTimeout(res, 1000));
     return res.redirect("/comment"); // Перенаправляем на страницу комментариев после удаления
   } catch (error) {
     console.error(error);
