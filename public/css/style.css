@@ -115,6 +115,8 @@ a:hover{
     border: none;
     border-radius: 0.7vw;
     cursor: pointer;
+    padding-left: 1vw;
+    padding-right: 1vw;
 }
 .block_two{
     height: 83vw;
