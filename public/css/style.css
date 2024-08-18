@@ -536,9 +536,14 @@ justify-content: center;
     }
     .text_four{
         font-size: 4vw;
+        width: 70vw;
     }
     .div_text_block_four{
         display: none;
+    }
+    .title_five{
+        text-align: center;
+        padding-bottom: 3vw;
     }
     .div_text_block_four1{
         display: block;
@@ -565,7 +570,6 @@ justify-content: center;
     }
     footer{
         height: 20vw;
-        margin-top: 5vw;
     }
     .navbar {
         overflow: hidden;
